@@ -3,6 +3,9 @@ import Abstract from "../../images/abstract.svg";
 import Editor from "../Common/editor/Editor";
 import db from "../../firestore";
 import { collection, getDocs } from "firebase/firestore/lite";
+import gitHub from "../../images/github.svg";
+import linkedin from "../../images/linkedin.svg";
+import email from "../../images/email.svg";
 
 const Home = () => {
   const [initialIntroduction, setInitialIntroduction] = useState({});
@@ -29,6 +32,48 @@ const Home = () => {
           <p className="flow-text uppercase-class">
             {initialIntroduction.oneLiner}
           </p>
+          <a
+            className="resume-button"
+            href={initialIntroduction.myResume}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Download Resume
+          </a>
+          <span className="social-links">
+            {/* add mailto:abc@xyz.com in doc for proper function */}
+            <a
+              href={initialIntroduction.mailMe}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                className="social-link-img"
+                src={email}
+                alt="mail-link"
+                height="25"
+                width="35"
+              />
+            </a>
+            <a
+              href={initialIntroduction.githubURL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img className="social-link-img" src={gitHub} alt="github-link" />
+            </a>
+            <a
+              href={initialIntroduction.linkedinURL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                className="social-link-img"
+                src={linkedin}
+                alt="linkedin-link"
+              />
+            </a>
+          </span>
         </div>
         <div className="hide-on-med-and-down class-editor-call">
           <Editor initialIntroduction={initialIntroduction}></Editor>

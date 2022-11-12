@@ -14,6 +14,36 @@
 }
 
 #light {
+    .resume-button {
+        display: flex;
+        background: linear-gradient(134deg, $lightButtonGradientColor 0%, $lightTextColor 99%);
+        color: rgb(248, 248, 248);
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease 0s;
+        width: fit-content;
+        height: fit-content;
+        font-size: 12px;
+        margin: 5px;
+        padding: 12px;
+        border-radius: 5px;
+    }
+
+    .social-links {
+        display: flex;
+        margin: 5px;
+    }
+
+    .social-link-img {
+        padding-right: 10px;
+        margin-top: 15px;
+        cursor: pointer;
+
+        :hover {
+            transform: scale(1.5);
+        }
+    }
+
     .content {
         position: absolute;
         color: $blackColor;
@@ -55,6 +85,37 @@
 }
 
 #dark {
+    .resume-button {
+        display: flex;
+        background: linear-gradient(134deg, $vectorColor 0%, $darkHeadingColor 99%);
+        color: $darkBackgroundColor;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease 0s;
+        width: fit-content;
+        height: fit-content;
+        font-size: 12px;
+        margin: 5px;
+        padding: 12px;
+        border-radius: 5px;
+        transition: transform .2s;
+
+        :hover {
+            transform: scale(1.5);
+        }
+    }
+
+    .social-links {
+        display: flex;
+        margin: 5px;
+    }
+
+    .social-link-img {
+        padding-right: 10px;
+        margin-top: 15px;
+        cursor: pointer;
+    }
+
     .content {
         position: absolute;
         color: $darkHeadingColor;
