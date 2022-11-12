@@ -1,0 +1,66 @@
+.editor-class {
+    position: relative;
+}
+
+.card-class {
+    max-width: 440px;
+
+    .card-radius {
+        border-radius: 10px;
+    }
+}
+
+.editor-var {
+    color: $editorVarColor;
+}
+
+.editor-line-number {
+    color: $editorLineNumberColor !important
+}
+
+.editor-user-var {
+    color: $editorUserVarColor !important;
+}
+
+.editor-bracket-color {
+    color: $editorLineNumberColor !important;
+}
+
+.editor-property-color {
+    color: $editorPropertyColor;
+}
+
+.editor-user-string {
+    color: $editorUserString;
+}
+
+.editor-class-property {
+    color: $editorClassProperty
+}
+
+#light {
+    .editor-card {
+        background-color: $editorBackgroundColor;
+        box-shadow: 0 20px 68px rgb(0 0 0 / 55%);
+    }
+
+    .editor-card-content {
+        padding: 20px 35px;
+        line-height: 20px;
+        color: $lightTextColor;
+    }
+}
+
+#dark {
+
+    .editor-card {
+        background-color: hsl(198, 90%, 15%);
+        box-shadow: 0 20px 68px rgb(0 0 0 / 55%);
+    }
+
+    .editor-card-content {
+        padding: 20px 35px;
+        line-height: 20px;
+        color: $darkTextColor;
+    }
+}

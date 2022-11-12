@@ -1,0 +1,30 @@
+@import './colors.scss', './components/navbar/Navbar.scss', './components/Common/Toolbar/toolbar.scss', './components/home/home.scss', './components/Common/editor/editor.scss';
+
+#light {
+    background-color: $lightBackgroundColor;
+    color: $lightTextColor;
+}
+
+#dark {
+    background-color: $darkBackgroundColor;
+    color: $darkTextColor;
+}
+
+.App {
+    min-height: 100vh;
+    font-family: Montserrat, sans-serif;
+
+    // .abstract-vector{
+    //     position: absolute;
+    //     height: 80%;
+    //     right: 0;
+    // }
+}
+
+.uppercase-class {
+    text-transform: uppercase;
+}
+
+.capitalize-class {
+    text-transform: capitalize;
+}

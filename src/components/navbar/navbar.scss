@@ -1,0 +1,209 @@
+#light {
+    .toggle-button {
+        padding-top: 12px;
+    }
+
+    nav {
+        background: transparent;
+
+        ul a {
+            color: $lightTextColor;
+        }
+    }
+
+    .menu-btn {
+        width: 70px;
+        height: 70px;
+        border-radius: 50px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+        border: 3px solid $whiteColor;
+    }
+
+    .menu-btn__burger {
+        width: 40px;
+        height: 4px;
+        background: $lightBackgroundColor;
+        border-radius: 5px;
+        transition: all .2s ease-in-out;
+    }
+
+    .menu-btn__burger::before,
+    .menu-btn__burger::after {
+        content: '';
+        position: absolute;
+        width: 40px;
+        height: 4px;
+        background: $lightBackgroundColor;
+        border-radius: 5px;
+        transition: all .2s ease-in-out;
+    }
+
+    .menu-btn__burger::before {
+        transform: translateY(-16px);
+    }
+
+    .menu-btn__burger::after {
+        transform: translateY(16px);
+    }
+
+    .bottom-menu {
+        position: absolute;
+        background: $lightHeadingColor;
+        border-radius: 50px;
+        right: 25px;
+        z-index: 1;
+        bottom: 0;
+    }
+
+    .is-open {
+        display: block;
+    }
+
+    .is-close {
+        display: none;
+    }
+
+    .hamburger-menu {
+        margin: 0px;
+        background: $lightHeadingColor;
+        color: $blackColor;
+        position: absolute;
+        text-align: center;
+        bottom: 90px;
+        right: 15px;
+        width: 100px;
+        border-radius: 10px;
+        z-index: 0;
+
+        .menu-item {
+            border: 0px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hamburger-link {
+            color: $lightBackgroundColor;
+        }
+
+        li {
+            padding-bottom: 5px;
+
+            :hover {
+                background-color: $lightHoverColor;
+                width: 100%;
+                border-radius: 10px;
+            }
+        }
+    }
+
+}
+
+
+#dark {
+    nav {
+        background: transparent;
+    }
+
+    nav ul a {
+        color: $darkTextColor;
+    }
+
+    .menu-btn {
+        width: 70px;
+        height: 70px;
+        border-radius: 50px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+        border: 3px solid $whiteColor;
+    }
+
+    .menu-btn__burger {
+        width: 40px;
+        height: 4px;
+        background: $darkTextColor;
+        border-radius: 5px;
+        transition: all .2s ease-in-out;
+    }
+
+    .menu-btn__burger::before,
+    .menu-btn__burger::after {
+        content: '';
+        position: absolute;
+        width: 40px;
+        height: 4px;
+        background: $darkTextColor;
+        border-radius: 5px;
+        transition: all .2s ease-in-out;
+    }
+
+    .menu-btn__burger::before {
+        transform: translateY(-16px);
+    }
+
+    .menu-btn__burger::after {
+        transform: translateY(16px);
+    }
+
+    .bottom-menu {
+        position: absolute;
+        background: $darkHeadingColor;
+        border-radius: 50px;
+        bottom: 0;
+        right: 25px;
+        z-index: 1;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+
+    .is-open {
+        display: block;
+    }
+
+    .is-close {
+        display: none;
+    }
+
+    .hamburger-menu {
+        margin: 0px;
+        background: $whiteColor;
+        color: $blackColor;
+        position: absolute;
+        text-align: center;
+        bottom: 90px;
+        right: 22px;
+        width: 100px;
+        border-radius: 10px;
+        z-index: 0;
+
+        .menu-item {
+            border: 0px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hamburger-link {
+            color: $darkBackgroundColor;
+        }
+
+        li {
+            padding-bottom: 5px;
+
+            :hover {
+                background-color: $darkHoverColor;
+                width: 100%;
+                border-radius: 10px;
+            }
+        }
+    }
+}
+
+// toggle button

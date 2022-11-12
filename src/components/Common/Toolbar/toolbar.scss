@@ -1,0 +1,208 @@
+$bg : hsl(223, 10%, 100%);
+$fg: hsl(223, 10%, 0%);
+$background-color_1: var(--bg);
+$transdur: 0.3s;
+$primaryt: hsla(223, 90%, 55%, 0);
+$primary: hsl(223, 90%, 55%);
+$background-color_2: hsl(0, 0%, 100%);
+$background-color_3: hsl(48, 90%, 85%);
+$background-color_4: $lightHoverColor;
+$background-color_5: hsl(198, 90%, 15%);
+$background-color_6: hsl(198, 90%, 55%);
+
+/* Default */
+#toggle {
+	.toggle-1 {
+		display: flex;
+		align-items: center;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.toggle-1__fill {
+		pointer-events: none;
+		transition: transform $transdur ease-in-out;
+		background-color: $background-color_1;
+		display: block;
+		mix-blend-mode: difference;
+		position: fixed;
+		inset: 0;
+		height: 100%;
+		transform: translateX(-100%);
+		opacity: 0;
+	}
+
+	.toggle-1__icon {
+		pointer-events: none;
+		transition: transform $transdur ease-in-out;
+		z-index: 1;
+		position: absolute;
+		display: block;
+		top: 0.75em;
+		left: 0.75em;
+		width: 1.5em;
+		height: 1.5em;
+	}
+
+	.toggle-1__toggle {
+		z-index: 1;
+		opacity: 1;
+		position: relative;
+		display: block;
+		background-color: $background-color_3;
+		border-radius: 25% / 50%;
+		box-shadow: 0 0 0 0.125em $primaryt;
+		padding: 0.25em;
+		width: 6em;
+		height: 3em;
+		appearance: none;
+		-webkit-appearance: none;
+		cursor: pointer;
+		transition: background-color $transdur ease-in-out, box-shadow 0.15s ease-in-out, transform $transdur ease-in-out;
+
+		&::before {
+			opacity: 1;
+			display: block;
+			background-color: $background-color_4;
+			border-radius: 50%;
+			content: "";
+			width: 2.5em;
+			height: 2.5em;
+			transition: background-color $transdur ease-in-out, transform $transdur ease-in-out;
+		}
+
+		&:focus {
+			opacity: 1;
+			box-shadow: 0 0 0 0.125em $primary;
+			outline: transparent;
+		}
+
+		&:checked {
+			background-color: $background-color_5;
+			opacity: 1;
+
+			&::before {
+				transform: translateX(3em);
+				background-color: $background-color_6;
+				opacity: 1;
+			}
+
+			~ {
+				.toggle-1__icon {
+					transform: translateX(3em);
+
+					.toggle-1__icon-part {
+						&:nth-child(1) {
+							transform: scale(1);
+							box-shadow: 0.2em -0.2em 0 0.2em hsl(0, 0%, 100%) inset;
+						}
+
+						~ {
+							.toggle-1__icon-part {
+								opacity: 0;
+							}
+						}
+
+						&:nth-child(2) {
+							transform: rotate(45deg) translateY(0.8em);
+						}
+
+						&:nth-child(3) {
+							transform: rotate(90deg) translateY(0.8em);
+						}
+
+						&:nth-child(4) {
+							transform: rotate(135deg) translateY(0.8em);
+						}
+
+						&:nth-child(5) {
+							transform: rotate(180deg) translateY(0.8em);
+						}
+
+						&:nth-child(6) {
+							transform: rotate(225deg) translateY(0.8em);
+						}
+
+						&:nth-child(7) {
+							transform: rotate(270deg) translateY(0.8em);
+						}
+
+						&:nth-child(8) {
+							transform: rotate(315deg) translateY(0.8em);
+						}
+
+						&:nth-child(9) {
+							transform: rotate(360deg) translateY(0.8em);
+						}
+					}
+				}
+
+				.toggle-1__fill {
+					transform: translateX(0);
+				}
+			}
+		}
+	}
+
+	.toggle-1__icon-part {
+		position: absolute;
+		border-radius: 50%;
+		box-shadow: 0.4em -0.4em 0 0.5em hsl(0, 0%, 100%) inset;
+		top: calc(50% - 0.5em);
+		left: calc(50% - 0.5em);
+		width: 1em;
+		height: 1em;
+		transition: box-shadow $transdur ease-in-out, opacity $transdur ease-in-out, transform $transdur ease-in-out;
+		transform: scale(0.5);
+
+		~ {
+			.toggle-1__icon-part {
+				background-color: $background-color_2;
+				border-radius: 0.05em;
+				box-shadow: none;
+				top: 50%;
+				left: calc(50% - 0.05em);
+				transform: rotate(0) translateY(0.5em);
+				transform-origin: 50% 0;
+				width: 0.1em;
+				height: 0.2em;
+			}
+		}
+
+		&:nth-child(3) {
+			transform: rotate(45deg) translateY(0.5em);
+		}
+
+		&:nth-child(4) {
+			transform: rotate(90deg) translateY(0.5em);
+		}
+
+		&:nth-child(5) {
+			transform: rotate(135deg) translateY(0.5em);
+		}
+
+		&:nth-child(6) {
+			transform: rotate(180deg) translateY(0.5em);
+		}
+
+		&:nth-child(7) {
+			transform: rotate(225deg) translateY(0.5em);
+		}
+
+		&:nth-child(8) {
+			transform: rotate(270deg) translateY(0.5em);
+		}
+
+		&:nth-child(9) {
+			transform: rotate(315deg) translateY(0.5em);
+		}
+	}
+
+	.toggle-1__label {
+		position: relative;
+	}
+
+	.toggle-1__toggle-wrap {
+		position: relative;
+		margin: 0 0.75em;
+	}
+}
