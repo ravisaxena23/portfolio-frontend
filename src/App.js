@@ -1,8 +1,7 @@
 import { createContext, useState } from "react";
 import Navbar from "./components/navbar/Navbar";
 import { BrowserRouter } from "react-router-dom";
-import "./App.scss";
-import Editor from "./components/Common/editor/Editor";
+import "./_app.scss";
 import Home from "./components/home/Home";
 export const ThemeContext = createContext(null);
 
