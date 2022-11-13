@@ -29,7 +29,7 @@ const Home = () => {
         <div className="text-content">
           <p className="capitalize-class">{initialIntroduction.salutation}</p>
           <h1 className="capitalize-class">{initialIntroduction.fullName}</h1>
-          <p className="flow-text uppercase-class">
+          <p className="flow-text uppercase-class small-screen-flex">
             {initialIntroduction.oneLiner}
           </p>
           <a

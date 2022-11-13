@@ -1,4 +1,21 @@
 #light {
+
+    .mobile-theme-button{
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        border-radius: 50%;
+        left: 15px;
+        box-shadow: 0 20px 68px rgb(0 0 0 / 55%);
+        background-image: url('../../images/bulbEmpty.svg');
+        background-repeat: no-repeat;
+        width: 50px;
+        height: 50px;
+        background-position: center;
+        background-size: 30px;
+        background-color: $lightTextColor;
+        border: 3px solid $whiteColor;
+    }
     .toggle-button {
         padding-top: 12px;
     }
@@ -12,8 +29,8 @@
     }
 
     .menu-btn {
-        width: 70px;
-        height: 70px;
+        width: 50px;
+        height: 50px;
         border-radius: 50px;
         position: relative;
         display: flex;
@@ -25,7 +42,7 @@
     }
 
     .menu-btn__burger {
-        width: 40px;
+        width: 20px;
         height: 4px;
         background: $lightBackgroundColor;
         border-radius: 5px;
@@ -36,7 +53,7 @@
     .menu-btn__burger::after {
         content: '';
         position: absolute;
-        width: 40px;
+        width: 20px;
         height: 4px;
         background: $lightBackgroundColor;
         border-radius: 5px;
@@ -53,9 +70,9 @@
 
     .bottom-menu {
         position: absolute;
-        background: $lightHeadingColor;
+        background: $vectorColor;
         border-radius: 50px;
-        right: 25px;
+        right: 15px;
         z-index: 1;
         bottom: 0;
     }
@@ -113,9 +130,25 @@
         color: $darkTextColor;
     }
 
+    .mobile-theme-button{
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        border-radius: 50%;
+        left: 15px;
+        box-shadow: 0 20px 68px rgb(0 0 0 / 55%);
+        background-image: url('../../images/bulbFilled.svg');
+        background-repeat: no-repeat;
+        width: 50px;
+        height: 50px;
+        background-position: center;
+        background-size: 30px;
+        background-color: $editorDarkTheme;
+        border: 3px solid $whiteColor;
+    }
     .menu-btn {
-        width: 70px;
-        height: 70px;
+        width: 50px;
+        height: 50px;
         border-radius: 50px;
         position: relative;
         display: flex;
@@ -124,10 +157,11 @@
         cursor: pointer;
         transition: all .2s ease-in-out;
         border: 3px solid $whiteColor;
+        box-shadow: 0 20px 68px rgb(0 0 0 / 55%);
     }
 
     .menu-btn__burger {
-        width: 40px;
+        width: 20px;
         height: 4px;
         background: $darkTextColor;
         border-radius: 5px;
@@ -138,7 +172,7 @@
     .menu-btn__burger::after {
         content: '';
         position: absolute;
-        width: 40px;
+        width: 20px;
         height: 4px;
         background: $darkTextColor;
         border-radius: 5px;
@@ -155,10 +189,10 @@
 
     .bottom-menu {
         position: absolute;
-        background: $darkHeadingColor;
+        background: $vectorColor;
         border-radius: 50px;
         bottom: 0;
-        right: 25px;
+        right: 15px;
         z-index: 1;
         margin-bottom: 10px;
         margin-right: 10px;

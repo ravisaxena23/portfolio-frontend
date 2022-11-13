@@ -8,7 +8,7 @@ const Editor = (props) => {
         <div className="card-class">
           <div className="card card-radius editor-card">
             <div className="editor-card-content">
-              <img src={ThreeDotImg}></img>
+              <img src={ThreeDotImg} alt="three-dots"></img>
               <p className="editor-var">
                 <span className="editor-line-number">1</span>
                 &nbsp;&nbsp;&nbsp;class{" "}
@@ -46,7 +46,7 @@ const Editor = (props) => {
                       <span className="uppercase-class editor-user-string">
                         {trait}{" "}
                       </span>
-                      {index !=
+                      {index !==
                       props?.initialIntroduction?.traits?.length - 1 ? (
                         <span className="editor-bracket-color">,</span>
                       ) : (

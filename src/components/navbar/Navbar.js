@@ -39,12 +39,17 @@ const Navbar = (props) => {
               </Link>
             </li>
             <li style={{ paddingTop: "12px" }}>
-              {" "}
               <Toolbar toggleTheme={props.toggleTheme}></Toolbar>
             </li>
           </ul>
         </div>
       </nav>
+      <div className="show-on-small hide-on-med-and-up z-depth-5">
+      <button className = "mobile-theme-button"
+       onClick={() => props.toggleTheme("dark")}>
+        {/* <img src = {filledBulb}  alt="bulb" height="40px" width="35px"/> */}
+      </button>
+      </div>
       <div
         className="show-on-small hide-on-med-and-up bottom-menu z-depth-5"
         onClick={toggleMenu}

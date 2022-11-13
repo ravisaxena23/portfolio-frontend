@@ -13,6 +13,12 @@
     justify-content: end;
 }
 
+
+.small-screen-flex{
+    display: flex;
+}
+
+
 #light {
     .resume-button {
         display: flex;
@@ -23,7 +29,7 @@
         transition: all 0.2s ease 0s;
         width: fit-content;
         height: fit-content;
-        font-size: 12px;
+        font-size: 0.8rem;
         margin: 5px;
         padding: 12px;
         border-radius: 5px;
@@ -55,11 +61,12 @@
 
         @media screen and (max-width: 400px) {
             top: 25px;
-            width: 100%;
+            left:25px
         }
 
-        @media screen and (min-width: $medium) {
-            //do Smth
+        @media screen and (min-width: $medium ) and (max-width: $small) {
+            top: 100px;
+            left:20px
         }
 
         .class-editor-call {
@@ -73,6 +80,10 @@
                 font-size: 20px;
                 margin: 2px;
             }
+
+            @media screen and (max-width: 400px) {
+                top: 25px;
+            }
         }
 
         h1 {
@@ -80,6 +91,13 @@
             line-height: 110%;
             margin: 0px;
             font-weight: 900;
+
+            @media screen and (max-width: 400px) {
+                font-size: 3.2rem;
+                line-height: 110%;
+                margin: 0px;
+                font-weight: 700;
+            }
         }
     }
 }
@@ -87,22 +105,17 @@
 #dark {
     .resume-button {
         display: flex;
-        background: linear-gradient(134deg, $vectorColor 0%, $darkHeadingColor 99%);
-        color: $darkBackgroundColor;
+        background: linear-gradient(134deg, $lightButtonGradientColor 0%, $darkHeadingColor 99%);
+        color: $blackColor;
         border: none;
         cursor: pointer;
         transition: all 0.2s ease 0s;
         width: fit-content;
         height: fit-content;
-        font-size: 12px;
+        font-size: 0.8rem;
         margin: 5px;
         padding: 12px;
         border-radius: 5px;
-        transition: transform .2s;
-
-        :hover {
-            transform: scale(1.5);
-        }
     }
 
     .social-links {
@@ -114,6 +127,10 @@
         padding-right: 10px;
         margin-top: 15px;
         cursor: pointer;
+
+        :hover {
+            transform: scale(1.5);
+        }
     }
 
     .content {
@@ -124,6 +141,16 @@
         left: 40px;
         top: 200px;
         width: 90%;
+
+        @media screen and (max-width: 400px) {
+            top: 25px;
+            left:25px
+        }
+
+        @media screen and (min-width: $medium ) and (max-width: $small) {
+            top: 100px;
+            left:20px
+        }
 
         .class-editor-call {
             z-index: 1;
@@ -136,6 +163,10 @@
                 font-size: 20px;
                 margin: 2px;
             }
+
+            @media screen and (max-width: 400px) {
+                top: 25px;
+            }
         }
 
         h1 {
@@ -143,6 +174,13 @@
             line-height: 110%;
             margin: 0px;
             font-weight: 900;
+
+            @media screen and (max-width: 400px) {
+                font-size: 3.2rem;
+                line-height: 110%;
+                margin: 0px;
+                font-weight: 700;
+            }
         }
     }
 }
