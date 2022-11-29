@@ -25,10 +25,10 @@ const Editor = (props) => {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span className="editor-property-color">this</span>
                 <span className="editor-bracket-color">.</span>
-                <span className="editor-user-var">name</span>
+                <span className="editor-user-var">experience</span>
                 <span className="editor-bracket-color"> = </span>
                 <span className="editor-user-string capitalize-class">
-                  "{props.initialIntroduction.fullName}"
+                  "{props.initialIntroduction.experience}"
                 </span>
                 <span className="editor-bracket-color">;</span>
               </p>

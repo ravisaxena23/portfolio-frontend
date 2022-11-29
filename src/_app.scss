@@ -1,25 +1,116 @@
-@import './colors', './components/navbar/navbar', './components/Common/Toolbar/toolbar', './components/home/home', './components/Common/editor/editor';
+@import './colors', 
+'./components/navbar/navbar', 
+'./components/Common/Toolbar/toolbar', 
+'./components/home/home', 
+'./components/Common/editor/editor' ,
+'./components/experience/experience',
+'./components/aboutMe/aboutme';
+
+.display-flex {
+    display: flex;
+}
+
+.padding-20 {
+    padding: 20px;
+}
+
+.padding-10 {
+    padding: 10px;
+}
+.margin-left-5{
+    margin-left: 5px;
+}
+
+.margin-right-5{
+    margin-right: 5px;
+}
+
+.margin-top-20{
+    margin-top: 20px;
+}
+
+.margin-top-40{
+    margin-top: 40px;
+}
+
+.margin-60{
+    margin: 60px;
+}
+
+.margin-top-150{
+    margin-top: 150px;
+}
+
+.margin-bottom-0{
+    margin-bottom: 0px;
+}
+
+.box-shadow{
+    box-shadow: 0 20px 68px rgb(0 0 0 / 55%);
+}
 
 #light {
     background-color: $lightBackgroundColor;
     color: $lightTextColor;
+
+    .page-heading {
+        font-size: 2.2rem;
+        text-transform: capitalize;
+        display: flex;
+        justify-content: center;
+        line-height: 110%;
+        margin: 0px;
+        font-weight: 900;
+        color: $blackColor;
+
+        @media screen and (max-width: 400px) {
+            font-size: 3.2rem;
+            line-height: 110%;
+            margin: 0px;
+            font-weight: 700;
+        }
+    }
 }
 
 #dark {
     background-color: $darkBackgroundColor;
     color: $darkTextColor;
+
+    .page-heading {
+        font-size: 2.2rem;
+        display: flex;
+        text-transform: capitalize;
+        justify-content: center;
+        line-height: 110%;
+        margin: 0px;
+        font-weight: 900;
+        color: $darkHeadingColor;
+
+        @media screen and (max-width: 400px) {
+            font-size: 3.2rem;
+            line-height: 110%;
+            margin: 0px;
+            font-weight: 700;
+        }
+    }
 }
 
-.App {
-    min-height: 100vh;
-    font-family: Montserrat, sans-serif;
-
-    // .abstract-vector{
-    //     position: absolute;
-    //     height: 80%;
-    //     right: 0;
-    // }
+#dark{
+    .App {
+        min-height: 100vh;
+        font-family: Montserrat, sans-serif;
+        background-color: $darkBackgroundColor;
+    }
 }
+
+#light{
+    .App {
+        min-height: 100vh;
+        font-family: Montserrat, sans-serif;
+        background-color: $lightBackgroundColor;
+    }
+}
+
 
 .uppercase-class {
     text-transform: uppercase;

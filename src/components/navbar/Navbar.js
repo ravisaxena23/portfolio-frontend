@@ -16,15 +16,15 @@ const Navbar = (props) => {
           {/* <a href="#" className="brand-logo">Logo</a> */}
           <ul className="right hide-on-small">
             <li className="navbar-item">
-              <Link to="">Home</Link>
+              <Link to="#home">Home</Link>
             </li>
             <li>
-              <Link to="" className="">
+              <Link to="#aboutMe" className="">
                 About Me
               </Link>
             </li>
             <li>
-              <Link to="" className="">
+              <Link to="#experience" className="">
                 Experince
               </Link>
             </li>
@@ -63,17 +63,17 @@ const Navbar = (props) => {
           className={`hamburger-menu && ${hideMenu ? "is-close" : "is-open"}`}
         >
           <li className="menu-item">
-            <Link to="" className="padding-10 hamburger-link">
+            <Link to="#home" className="padding-10 hamburger-link" smooth>
               Home
             </Link>
           </li>
           <li className="menu-item">
-            <Link to="" className="padding-10 hamburger-link">
+            <Link to="#aboutMe" className="padding-10 hamburger-link">
               About Me
             </Link>
           </li>
           <li className="menu-item">
-            <Link to="" className="padding-10 hamburger-link">
+            <Link to="#experience" className="padding-10 hamburger-link">
               Experince
             </Link>
           </li>

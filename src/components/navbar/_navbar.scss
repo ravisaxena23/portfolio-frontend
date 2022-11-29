@@ -1,7 +1,7 @@
 #light {
 
     .mobile-theme-button{
-        position: absolute;
+        position: fixed;
         bottom: 0;
         z-index: 1;
         border-radius: 50%;
@@ -39,6 +39,7 @@
         cursor: pointer;
         transition: all .2s ease-in-out;
         border: 3px solid $whiteColor;
+        box-shadow: 0 20px 68px rgb(0 0 0 / 55%);
     }
 
     .menu-btn__burger {
@@ -69,7 +70,7 @@
     }
 
     .bottom-menu {
-        position: absolute;
+        position: fixed;
         background: $vectorColor;
         border-radius: 50px;
         right: 15px;
@@ -131,7 +132,7 @@
     }
 
     .mobile-theme-button{
-        position: absolute;
+        position: fixed;
         bottom: 0;
         z-index: 1;
         border-radius: 50%;
@@ -188,14 +189,12 @@
     }
 
     .bottom-menu {
-        position: absolute;
+        position: fixed;
         background: $vectorColor;
         border-radius: 50px;
         bottom: 0;
         right: 15px;
         z-index: 1;
-        margin-bottom: 10px;
-        margin-right: 10px;
     }
 
     .is-open {

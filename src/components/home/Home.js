@@ -19,12 +19,10 @@ const Home = () => {
       });
     };
     fetchInitialData();
-    console.log("initialIntro", initialIntroduction);
   }, []);
 
-  console.log("initialIntro", initialIntroduction);
   return (
-    <div className="home">
+    <div className="home" id="home">
       <div className="content">
         <div className="text-content">
           <p className="capitalize-class">{initialIntroduction.salutation}</p>
