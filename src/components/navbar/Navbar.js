@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { HashLink as Link } from "react-router-hash-link";
 import Toolbar from "../Common/Toolbar/Toolbar";
-
+import logo from "../../images/logo.svg";
 const Navbar = (props) => {
   const [hideMenu, setHideMenu] = useState(true);
 
@@ -13,7 +13,9 @@ const Navbar = (props) => {
     <div>
       <nav className="hide-on-small-only">
         <div className="navbar-fixed">
-          {/* <a href="#" className="brand-logo">Logo</a> */}
+          <a href="#aboutMe">
+            <img className="logo" src={logo} alt="logo"></img>
+          </a>
           <ul className="right hide-on-small">
             <li className="navbar-item">
               <Link to="#home">Home</Link>
@@ -28,13 +30,13 @@ const Navbar = (props) => {
                 Experince
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="" className="">
                 Projects
               </Link>
-            </li>
+            </li> */}
             <li>
-              <Link to="" className="">
+              <Link to="#contact" className="">
                 Contact
               </Link>
             </li>
@@ -45,10 +47,12 @@ const Navbar = (props) => {
         </div>
       </nav>
       <div className="show-on-small hide-on-med-and-up z-depth-5">
-      <button className = "mobile-theme-button"
-       onClick={() => props.toggleTheme("dark")}>
-        {/* <img src = {filledBulb}  alt="bulb" height="40px" width="35px"/> */}
-      </button>
+        <button
+          className="mobile-theme-button"
+          onClick={() => props.toggleTheme("dark")}
+        >
+          {/* <img src = {filledBulb}  alt="bulb" height="40px" width="35px"/> */}
+        </button>
       </div>
       <div
         className="show-on-small hide-on-med-and-up bottom-menu z-depth-5"
@@ -78,12 +82,12 @@ const Navbar = (props) => {
             </Link>
           </li>
           <li className="menu-item">
-            <Link to="" className="padding-10 hamburger-link">
+            {/* <Link to="" className="padding-10 hamburger-link">
               Projects
-            </Link>
+            </Link> */}
           </li>
           <li className="menu-item" style={{ paddingBottom: "0px" }}>
-            <Link to="" className="padding-10 hamburger-link">
+            <Link to="#contact" className="padding-10 hamburger-link">
               Contact
             </Link>
           </li>

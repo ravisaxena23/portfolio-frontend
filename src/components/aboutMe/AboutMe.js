@@ -39,6 +39,7 @@ const AboutMe = () => {
             <a
               href={myData.currentCompanyURL}
               className="margin-left-5 margin-right-5"
+              target="_blank"
             >
               {myData.currentCompany}
             </a>
