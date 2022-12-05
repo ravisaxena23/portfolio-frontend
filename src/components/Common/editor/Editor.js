@@ -39,7 +39,7 @@ const Editor = (props) => {
                 <span className="editor-bracket-color">.</span>
                 <span className="editor-user-var">traits</span>
                 <span className="editor-bracket-color"> = </span>
-                <span className="editor-bracket-color">&#91;</span>
+                <span className="editor-bracket-color">&#91; </span>
                 {props?.initialIntroduction?.traits?.length > 0 ? (
                   props.initialIntroduction.traits.map((trait, index) => (
                     <span key={index}>
@@ -48,7 +48,7 @@ const Editor = (props) => {
                       </span>
                       {index !==
                       props?.initialIntroduction?.traits?.length - 1 ? (
-                        <span className="editor-bracket-color">,</span>
+                        <span className="editor-bracket-color">, </span>
                       ) : (
                         <span></span>
                       )}
