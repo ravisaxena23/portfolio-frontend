@@ -1,31 +1,54 @@
-// light theme colors
-$lightTextColor: #B25068;
-$lightBackgroundColor: #FEFEFE;
-$lightHeadingColor: #16213E;
-$lightHoverColor: #E49830;
-$lightButtonGradientColor:#CA4E79;
+// Design tokens — systems-in-motion editorial palette
+$fontDisplay: "Syne", sans-serif;
+$fontBody: "IBM Plex Sans", sans-serif;
+$fontMono: "IBM Plex Mono", monospace;
 
+$ember: #c45c26;
+$emberSoft: #e08a4a;
+$amber: #ffbc42;
+$slate950: #0f1218;
+$slate900: #161b22;
+$slate800: #1e2630;
+$slate100: #f4f1ec;
+$slate50: #faf8f5;
+$ink: #1a1f29;
+$muted: #5c6570;
+$mutedDark: #a8b0ba;
+$line: rgba(26, 31, 41, 0.12);
+$lineDark: rgba(255, 255, 255, 0.1);
 
-// dark theme colors
-$darkBackgroundColor: #161616;
-$darkHeadingColor: #FFBC42;
-$darkTextColor: #FCF6F5;
+$lightBackgroundColor: $slate50;
+$lightTextColor: $ink;
+$lightHeadingColor: $ink;
+$lightMuted: $muted;
+$lightAccent: $ember;
+$lightSurface: #ffffff;
+$lightHoverColor: $emberSoft;
+
+$darkBackgroundColor: $slate950;
+$darkHeadingColor: #f3efe6;
+$darkTextColor: #e8ebe6;
+$darkMuted: $mutedDark;
+$darkAccent: $amber;
+$darkSurface: $slate900;
 $darkHoverColor: #dddddd;
 
+$vectorColor: $ember;
+$blackColor: $ink;
+$whiteColor: #fafafa;
 
-// general colors
-$vectorColor: #B25068;
-$blackColor: #24232E;
-$whiteColor: #FAFAFA;
-$editorVarColor : #ef6155;
+$editorVarColor: #ef6155;
 $editorUserVarColor: #f99b15;
 $editorLineNumberColor: #776e71;
-$editorBackgroundColor: #2F1E2E;
+$editorBackgroundColor: #2a1f2a;
 $editorPropertyColor: #06b6ef;
 $editorUserString: #fec418;
 $editorClassProperty: #48b685;
-$editorDarkTheme:#011627;
+$editorDarkTheme: #0d1b2a;
 
-// constants
-$small: 300px;
+$small: 640px;
 $medium: 900px;
+$large: 1100px;
+
+$contentMax: 1120px;
+$navHeight: 72px;

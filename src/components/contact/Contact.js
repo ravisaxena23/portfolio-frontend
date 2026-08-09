@@ -1,199 +1,181 @@
-import { React, useState, useEffect } from "react";
-import { doc, setDoc, getDocs, collection } from "firebase/firestore/lite";
+import React, { useState } from "react";
+import { doc, setDoc } from "firebase/firestore/lite";
 import db from "../../firestore";
-import shakeHand from "./../../images/shakeHand.svg";
+import useReveal from "../../hooks/useReveal";
+
+const EMAIL_REGEX =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+const emptyForm = {
+  name: "",
+  email: "",
+  mobileNumber: "",
+  query: "",
+};
 
 const Contact = () => {
-  const emailRegex =
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const [formDetails, setFormDetails] = useState({
-    name: "",
-    email: "",
-    mobileNumber: "",
-    query: "",
-  });
-  // const [db, setDb] = useState(null)
+  const { ref, visible } = useReveal();
+  const [formDetails, setFormDetails] = useState(emptyForm);
   const [formDetailsError, setFormDetailsError] = useState({
     nameError: "",
     emailError: "",
     mobileNumberError: "",
     queryError: "",
   });
+  const [status, setStatus] = useState("idle"); // idle | submitting | success | error
 
   const handleChange = (e) => {
-    setFormDetails((prevState) => ({
-      ...prevState,
+    setFormDetails((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
     }));
   };
 
   const validate = () => {
-    let nameerror = "";
-    let emailerror = "";
-    let queryerror = "";
-    let mobileerror = "";
+    const nameError = formDetails.name.trim() ? "" : "Name is required";
+    const emailError = EMAIL_REGEX.test(formDetails.email)
+      ? ""
+      : "Enter a valid email";
+    const digits = formDetails.mobileNumber.replace(/\D/g, "");
+    const mobileNumberError =
+      digits.length >= 10 && digits.length <= 13
+        ? ""
+        : "Enter a valid mobile number";
+    const queryError = formDetails.query.trim()
+      ? ""
+      : "Please write a short message";
 
-    if (!formDetails.name) {
-      nameerror = "Blank Name";
-    }
+    setFormDetailsError({
+      nameError,
+      emailError,
+      mobileNumberError,
+      queryError,
+    });
 
-    if (!emailRegex.test(formDetails.email)) {
-      emailerror = "Invalid Email";
-    }
-
-    if (!formDetails.mobileNumber || !!formDetails.mobileNumber.length === 13) {
-      mobileerror = "Invalid Mobile No";
-    }
-
-    if (!formDetails.query) {
-      queryerror = "Oops You Forget To Write";
-    }
-
-    if (emailerror || nameerror || mobileerror || queryerror) {
-      setFormDetailsError({
-        emailError: emailerror,
-        nameError: nameerror,
-        mobileNumberError: mobileerror,
-        queryError: queryerror,
-      });
-      return false;
-    }
-
-    return true;
+    return !(nameError || emailError || mobileNumberError || queryError);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      const saveMessage = async () => {
-       await setDoc(
-          doc(db, "Message", String(new Date().getTime())),
-          formDetails
-        ).then(()=>{
-          setFormDetails({
-            name: "",
-            email: "",
-            mobileNumber: "",
-            query: "",
-          });
-        })
-      };
-      saveMessage();
-    } else {
-      console.error("some thing went wrong");
+    if (!validate()) return;
+
+    setStatus("submitting");
+    try {
+      await setDoc(doc(db, "Message", String(Date.now())), {
+        ...formDetails,
+        createdAt: new Date().toISOString(),
+      });
+      setFormDetails(emptyForm);
+      setFormDetailsError({
+        nameError: "",
+        emailError: "",
+        mobileNumberError: "",
+        queryError: "",
+      });
+      setStatus("success");
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
     }
   };
 
   return (
-    <div className="container padding-10 margin-top-40" id="contact">
-      <h1 className="page-heading">Get In Touch</h1>
-      <div className="display-flex">
-        <div className="card thankyou-card margin-top-40 hide-on-med-and-down">
-          <img src={shakeHand} className="shake-hand" alt="hand-shake" />
-          <p className="thankyou-note">Thank You</p>
-          <p className="query">Do You Have Any Queries?</p>
-        </div>
-        <div className="card app-card getintouch-card margin-top-40 display-flex">
-          <div className="">
-            <form>
-              <div className="row ">
-                <div className="col m4 s12">
-                  <label className="label">Name</label>
-                  <input
-                    className="getintouch-input browser-default"
-                    type="text"
-                    name="name"
-                    placeholder="John Doe"
-                    value={formDetails.name}
-                    onChange={(e) => handleChange(e)}
-                    required
-                  />
-                  {formDetailsError.nameError ? (
-                    <div className="form-show">
-                      {formDetailsError.nameError}
-                    </div>
-                  ) : (
-                    <div className="form-hide">
-                      {formDetailsError.nameError}
-                    </div>
-                  )}
-                </div>
-                <div className="col m4 s12">
-                  <label className="label">Email</label>
-                  <input
-                    className="getintouch-input browser-default"
-                    type="email"
-                    name="email"
-                    placeholder="example@gmail.com"
-                    value={formDetails.email}
-                    onChange={(e) => handleChange(e)}
-                  />
-                  {formDetailsError.emailError ? (
-                    <div className="form-show">
-                      {formDetailsError.emailError}
-                    </div>
-                  ) : (
-                    <div className="form-hide">
-                      {formDetailsError.emailError}
-                    </div>
-                  )}
-                </div>
-                <div className="col m4 s12">
-                  <label className="label">Mobile Number</label>
+    <section
+      id="contact"
+      className={`section contact reveal ${visible ? "is-visible" : ""}`}
+      ref={ref}
+    >
+      <p className="section-kicker">Contact</p>
+      <h2 className="section-heading">Let&apos;s work together</h2>
+      <p className="section-lede">
+        Have a role, project, or question? Send a note — I read every message.
+      </p>
 
-                  <input
-                    className="getintouch-input browser-default"
-                    type="text"
-                    name="mobileNumber"
-                    placeholder="1234567891"
-                    value={formDetails.mobileNumber}
-                    onChange={(e) => handleChange(e)}
-                  />
-                  {formDetailsError.mobileNumberError ? (
-                    <div className="form-show">
-                      {formDetailsError.mobileNumberError}
-                    </div>
-                  ) : (
-                    <div className="form-hide">
-                      {formDetailsError.mobileNumberError}
-                    </div>
-                  )}
-                </div>
-                <div className="col m12 s12">
-                  <label className="label">Message</label>
+      <form className="contact-form" onSubmit={onSubmit} noValidate>
+        <div className="contact-form__row">
+          <label className="contact-field">
+            <span>Name</span>
+            <input
+              type="text"
+              name="name"
+              placeholder="Jane Doe"
+              value={formDetails.name}
+              onChange={handleChange}
+              autoComplete="name"
+            />
+            {formDetailsError.nameError ? (
+              <em className="contact-field__error">{formDetailsError.nameError}</em>
+            ) : null}
+          </label>
 
-                  <textarea
-                    className="getintouch-input-textarea browser-default"
-                    type="text"
-                    name="query"
-                    placeholder="Hey there!"
-                    value={formDetails.query}
-                    onChange={(e) => handleChange(e)}
-                  />
-                  {formDetailsError.queryError ? (
-                    <div className="form-show">
-                      {formDetailsError.queryError}
-                    </div>
-                  ) : (
-                    <div className="form-hide">
-                      {formDetailsError.queryError}
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="btn-align">
-                <a type="submit" onClick={(e) => onSubmit(e)} href="#">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>Submit
-                </a>
-              </div>
-            </form>
-          </div>
+          <label className="contact-field">
+            <span>Email</span>
+            <input
+              type="email"
+              name="email"
+              placeholder="jane@company.com"
+              value={formDetails.email}
+              onChange={handleChange}
+              autoComplete="email"
+            />
+            {formDetailsError.emailError ? (
+              <em className="contact-field__error">{formDetailsError.emailError}</em>
+            ) : null}
+          </label>
+
+          <label className="contact-field">
+            <span>Mobile</span>
+            <input
+              type="tel"
+              name="mobileNumber"
+              placeholder="+91 98765 43210"
+              value={formDetails.mobileNumber}
+              onChange={handleChange}
+              autoComplete="tel"
+            />
+            {formDetailsError.mobileNumberError ? (
+              <em className="contact-field__error">
+                {formDetailsError.mobileNumberError}
+              </em>
+            ) : null}
+          </label>
         </div>
-      </div>
-    </div>
+
+        <label className="contact-field contact-field--full">
+          <span>Message</span>
+          <textarea
+            name="query"
+            placeholder="Hey Ravi — let's talk about…"
+            value={formDetails.query}
+            onChange={handleChange}
+            rows={5}
+          />
+          {formDetailsError.queryError ? (
+            <em className="contact-field__error">{formDetailsError.queryError}</em>
+          ) : null}
+        </label>
+
+        <div className="contact-form__actions">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={status === "submitting"}
+          >
+            {status === "submitting" ? "Sending…" : "Send message"}
+          </button>
+          {status === "success" ? (
+            <p className="contact-form__status is-success" role="status">
+              Message sent. Talk soon.
+            </p>
+          ) : null}
+          {status === "error" ? (
+            <p className="contact-form__status is-error" role="alert">
+              Could not send. Please try again or email me directly.
+            </p>
+          ) : null}
+        </div>
+      </form>
+    </section>
   );
 };
 

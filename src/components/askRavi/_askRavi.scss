@@ -1,0 +1,176 @@
+.ask-ravi {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ask-ravi .section-lede {
+  margin-inline: auto;
+  max-width: 34rem;
+}
+
+.ask-ravi__panel {
+  width: min(100%, 44rem);
+  margin-inline: auto;
+  border-radius: 16px;
+  padding: 1.15rem;
+  border: 1px solid transparent;
+  text-align: left;
+}
+
+#light .ask-ravi__panel {
+  background: rgba(#fff, 0.78);
+  border-color: $line;
+  backdrop-filter: blur(10px);
+}
+
+#dark .ask-ravi__panel {
+  background: rgba($slate900, 0.82);
+  border-color: $lineDark;
+  backdrop-filter: blur(10px);
+}
+
+.ask-ravi__prompts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.ask-ravi__chip {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.ask-ravi__chip:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.ask-ravi__chip:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+#light .ask-ravi__chip {
+  background: rgba($ember, 0.08);
+  border-color: rgba($ember, 0.2);
+  color: $ink;
+}
+
+#dark .ask-ravi__chip {
+  background: rgba($amber, 0.1);
+  border-color: rgba($amber, 0.22);
+  color: $darkTextColor;
+}
+
+.ask-ravi__thread {
+  display: grid;
+  gap: 0.65rem;
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 0.35rem 0.15rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.ask-ravi__bubble {
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
+  max-width: 92%;
+}
+
+.ask-ravi__bubble p {
+  margin: 0.2rem 0 0;
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.ask-ravi__who {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.ask-ravi__bubble--user {
+  margin-left: auto;
+}
+
+#light .ask-ravi__bubble--user {
+  background: rgba($ember, 0.14);
+}
+
+#dark .ask-ravi__bubble--user {
+  background: rgba($amber, 0.16);
+}
+
+#light .ask-ravi__bubble--assistant {
+  background: rgba($ink, 0.05);
+  border: 1px solid $line;
+}
+
+#dark .ask-ravi__bubble--assistant {
+  background: rgba(#fff, 0.04);
+  border: 1px solid $lineDark;
+}
+
+.ask-ravi__form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.65rem;
+}
+
+.ask-ravi__form input {
+  width: 100%;
+  font: inherit;
+  padding: 0.85rem 0.95rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  outline: none;
+}
+
+#light .ask-ravi__form input {
+  background: #fff;
+  border-color: $line;
+  color: $ink;
+}
+
+#dark .ask-ravi__form input {
+  background: $slate950;
+  border-color: $lineDark;
+  color: $darkTextColor;
+}
+
+#light .ask-ravi__form input:focus {
+  border-color: $ember;
+}
+
+#dark .ask-ravi__form input:focus {
+  border-color: $amber;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: $small) {
+  .ask-ravi__form {
+    grid-template-columns: 1fr;
+  }
+}

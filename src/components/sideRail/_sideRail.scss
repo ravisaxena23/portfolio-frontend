@@ -1,0 +1,178 @@
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 50;
+  pointer-events: none;
+}
+
+#light .scroll-progress {
+  background: rgba($ink, 0.08);
+}
+
+#dark .scroll-progress {
+  background: rgba(#fff, 0.08);
+}
+
+.scroll-progress span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  transition: transform 0.1s linear;
+}
+
+#light .scroll-progress span {
+  background: $ember;
+}
+
+#dark .scroll-progress span {
+  background: $amber;
+}
+
+.film-rail {
+  position: fixed;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  z-index: 35;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-height: 70vh;
+  overflow: auto;
+  padding: 0.35rem;
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+}
+
+#light .film-rail {
+  background: rgba($slate50, 0.55);
+  border: 1px solid $line;
+}
+
+#dark .film-rail {
+  background: rgba($slate950, 0.55);
+  border: 1px solid $lineDark;
+}
+
+.film-rail__link {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.55rem;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.45rem 0.65rem;
+  border-radius: 10px;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.film-rail__index {
+  font-family: $fontMono;
+  font-size: 0.68rem;
+  opacity: 0.55;
+}
+
+.film-rail__name {
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.film-rail__link.is-active {
+  transform: translateX(2px);
+}
+
+#light .film-rail__link {
+  color: $lightMuted;
+}
+
+#dark .film-rail__link {
+  color: $darkMuted;
+}
+
+#light .film-rail__link.is-active,
+#light .film-rail__link:hover {
+  background: rgba($ember, 0.12);
+  color: $ink;
+}
+
+#dark .film-rail__link.is-active,
+#dark .film-rail__link:hover {
+  background: rgba($amber, 0.14);
+  color: $darkTextColor;
+}
+
+#light .film-rail__link.is-active .film-rail__index {
+  color: $ember;
+  opacity: 1;
+}
+
+#dark .film-rail__link.is-active .film-rail__index {
+  color: $amber;
+  opacity: 1;
+}
+
+.film-dots {
+  display: none;
+  position: fixed;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 35;
+  gap: 0.45rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+}
+
+#light .film-dots {
+  background: rgba($slate50, 0.8);
+  border: 1px solid $line;
+}
+
+#dark .film-dots {
+  background: rgba($slate950, 0.8);
+  border: 1px solid $lineDark;
+}
+
+.film-dots__item {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: block;
+  transition: transform 0.2s ease, background 0.2s ease, width 0.2s ease;
+}
+
+#light .film-dots__item {
+  background: rgba($ink, 0.25);
+}
+
+#dark .film-dots__item {
+  background: rgba(#fff, 0.28);
+}
+
+.film-dots__item.is-active {
+  width: 22px;
+  border-radius: 999px;
+}
+
+#light .film-dots__item.is-active {
+  background: $ember;
+}
+
+#dark .film-dots__item.is-active {
+  background: $amber;
+}
+
+@media (max-width: $medium) {
+  .film-rail {
+    display: none;
+  }
+
+  .film-dots {
+    display: flex;
+  }
+}

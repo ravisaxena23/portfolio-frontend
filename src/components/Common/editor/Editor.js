@@ -1,93 +1,90 @@
 import React from "react";
 import ThreeDotImg from "../../../images/threedot.svg";
 
-const Editor = (props) => {
+const Editor = ({ data }) => {
+  const experience = data?.experience || "5+ years";
+  const traits = data?.traits || [];
+  const birthYear = data?.birthYear || 1999;
+
   return (
-    <div className="editor-class">
-      <div className="row">
-        <div className="card-class">
-          <div className="card card-radius editor-card">
-            <div className="editor-card-content">
-              <img src={ThreeDotImg} alt="three-dots"></img>
-              <p className="editor-var">
-                <span className="editor-line-number">1</span>
-                &nbsp;&nbsp;&nbsp;class{" "}
-                <span className="editor-user-var">person</span>{" "}
-                <span className="editor-bracket-color">&#123;</span>
-              </p>
-              <p className="editor-var">
-                <span className="editor-line-number">2</span>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constructor{" "}
-                <span className="editor-bracket-color">( ) &#123;</span>
-              </p>
-              <p>
-                <span className="editor-line-number">3</span>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span className="editor-property-color">this</span>
-                <span className="editor-bracket-color">.</span>
-                <span className="editor-user-var">experience</span>
-                <span className="editor-bracket-color"> = </span>
-                <span className="editor-user-string capitalize-class">
-                  "{props.initialIntroduction.experience}"
-                </span>
-                <span className="editor-bracket-color">;</span>
-              </p>
-              <p>
-                <span className="editor-line-number">4</span>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span className="editor-property-color">this</span>
-                <span className="editor-bracket-color">.</span>
-                <span className="editor-user-var">traits</span>
-                <span className="editor-bracket-color"> = </span>
-                <span className="editor-bracket-color">&#91; </span>
-                {props?.initialIntroduction?.traits?.length > 0 ? (
-                  props.initialIntroduction.traits.map((trait, index) => (
-                    <span key={index}>
-                      <span className="uppercase-class editor-user-string">
-                        {trait}{" "}
-                      </span>
-                      {index !==
-                      props?.initialIntroduction?.traits?.length - 1 ? (
-                        <span className="editor-bracket-color">, </span>
-                      ) : (
-                        <span></span>
-                      )}
-                    </span>
-                  ))
-                ) : (
-                  <span></span>
-                )}
-                <span className="editor-bracket-color">&#93;;</span>
-              </p>
-              <p>
-                <span className="editor-line-number">5</span>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span className="editor-property-color">this</span>
-                <span className="editor-bracket-color">.</span>
-                <span className="editor-user-var">age</span>
-                <span className="editor-bracket-color"> = </span>
-                <span className="editor-var">new </span>
-                <span className="editor-class-property">Date</span>
-                <span className="editor-bracket-color">( ).</span>
-                <span className="editor-class-property">getFullYear</span>
-                <span className="editor-bracket-color">( ) - </span>
-                <span className="editor-user-string">
-                  {" "}
-                  {props.initialIntroduction.birthYear}
-                </span>
-                <span className="editor-bracket-color">;</span>
-              </p>
-              <p>
-                <span className="editor-line-number">6</span>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span className="editor-bracket-color">&#125;</span>
-              </p>
-              <p>
-                <span className="editor-line-number">7</span>&nbsp;&nbsp;
-                <span className="editor-bracket-color">&#125;</span>
-              </p>
-            </div>
-          </div>
+    <div className="editor-shell" aria-hidden="true">
+      <div className="editor-window">
+        <div className="editor-window__chrome">
+          <img src={ThreeDotImg} alt="" width="52" height="12" />
+          <span className="editor-window__title">systems.js</span>
+        </div>
+        <div className="editor-window__body">
+          <p>
+            <span className="ln">1</span>
+            <span className="kw">class</span>{" "}
+            <span className="id">AiEngineer</span> <span className="punct">{"{"}</span>
+          </p>
+          <p>
+            <span className="ln">2</span>
+            {"  "}
+            <span className="fn">constructor</span>
+            <span className="punct">() {"{"}</span>
+          </p>
+          <p>
+            <span className="ln">3</span>
+            {"    "}
+            <span className="prop">this</span>
+            <span className="punct">.</span>
+            <span className="id">experience</span>
+            <span className="punct"> = </span>
+            <span className="str">"{experience}"</span>
+            <span className="punct">;</span>
+          </p>
+          <p>
+            <span className="ln">4</span>
+            {"    "}
+            <span className="prop">this</span>
+            <span className="punct">.</span>
+            <span className="id">traits</span>
+            <span className="punct"> = [</span>
+            {traits.map((trait, index) => (
+              <span key={trait}>
+                <span className="str">"{trait}"</span>
+                {index < traits.length - 1 ? (
+                  <span className="punct">, </span>
+                ) : null}
+              </span>
+            ))}
+            <span className="punct">];</span>
+          </p>
+          <p>
+            <span className="ln">5</span>
+            {"    "}
+            <span className="prop">this</span>
+            <span className="punct">.</span>
+            <span className="id">focus</span>
+            <span className="punct"> = </span>
+            <span className="str">"AI systems & SaaS"</span>
+            <span className="punct">;</span>
+          </p>
+          <p>
+            <span className="ln">6</span>
+            {"    "}
+            <span className="prop">this</span>
+            <span className="punct">.</span>
+            <span className="id">age</span>
+            <span className="punct"> = </span>
+            <span className="kw">new</span> <span className="type">Date</span>
+            <span className="punct">().</span>
+            <span className="type">getFullYear</span>
+            <span className="punct">() - </span>
+            <span className="num">{birthYear}</span>
+            <span className="punct">;</span>
+          </p>
+          <p>
+            <span className="ln">7</span>
+            {"  "}
+            <span className="punct">{"}"}</span>
+          </p>
+          <p>
+            <span className="ln">8</span>
+            <span className="punct">{"}"}</span>
+          </p>
         </div>
       </div>
     </div>

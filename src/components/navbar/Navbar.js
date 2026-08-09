@@ -1,99 +1,138 @@
-import { React, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { HashLink as Link } from "react-router-hash-link";
-import Toolbar from "../Common/Toolbar/Toolbar";
-import logo from "../../images/logo.svg";
-const Navbar = (props) => {
-  const [hideMenu, setHideMenu] = useState(true);
+import { ThemeContext } from "../../App";
+import { usePortfolio } from "../../context/PortfolioContext";
 
-  const toggleMenu = () => {
-    setHideMenu((curr) => (curr === false ? true : false));
+const NAV_LINKS = [
+  { to: "#home", label: "Home" },
+  { to: "#about", label: "About" },
+  { to: "#experience", label: "Experience" },
+  { to: "#skills", label: "Skills" },
+  { to: "#stack", label: "Stack" },
+  { to: "#ask", label: "Ask Ravi AI" },
+  { to: "#contact", label: "Contact" },
+];
+
+const Navbar = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const portfolio = usePortfolio();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState("#home");
+  const brand = portfolio.greeting?.name?.split(" ")[0] || "Ravi";
+
+  useEffect(() => {
+    document.documentElement.style.scrollPaddingTop = "88px";
+  }, []);
+
+  useEffect(() => {
+    const ids = NAV_LINKS.map((l) => l.to.slice(1));
+
+    const sectionTop = (el) =>
+      el.getBoundingClientRect().top + window.scrollY;
+
+    const syncActive = () => {
+      const probe = window.scrollY + 140;
+      let current = `#${ids[0]}`;
+
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (sectionTop(el) <= probe) current = `#${id}`;
+      }
+
+      const doc = document.documentElement;
+      if (window.scrollY + window.innerHeight >= doc.scrollHeight - 64) {
+        current = `#${ids[ids.length - 1]}`;
+      }
+
+      setActive((prev) => (prev === current ? prev : current));
+    };
+
+    syncActive();
+    window.addEventListener("scroll", syncActive, { passive: true });
+    window.addEventListener("resize", syncActive);
+    window.addEventListener("hashchange", syncActive);
+    const boot = window.setTimeout(syncActive, 80);
+    return () => {
+      window.clearTimeout(boot);
+      window.removeEventListener("scroll", syncActive);
+      window.removeEventListener("resize", syncActive);
+      window.removeEventListener("hashchange", syncActive);
+    };
+  }, []);
+
+  const closeMenu = () => setMenuOpen(false);
+
+  const goTo = (hash) => {
+    setActive(hash);
+    closeMenu();
   };
 
   return (
-    <div>
-      <nav className="hide-on-small-only">
-        <div className="navbar-fixed">
-          <a href="#aboutMe">
-            <img className="logo" src={logo} alt="logo"></img>
-          </a>
-          <ul className="right hide-on-small">
-            <li className="navbar-item">
-              <Link to="#home">Home</Link>
-            </li>
-            <li>
-              <Link to="#aboutMe" className="">
-                About Me
-              </Link>
-            </li>
-            <li>
-              <Link to="#experience" className="">
-                Experince
-              </Link>
-            </li>
-            {/* <li>
-              <Link to="" className="">
-                Projects
-              </Link>
-            </li> */}
-            <li>
-              <Link to="#contact" className="">
-                Contact
-              </Link>
-            </li>
-            <li style={{ paddingTop: "12px" }}>
-              <Toolbar toggleTheme={props.toggleTheme}></Toolbar>
-            </li>
-          </ul>
+    <header className="pill-nav">
+      <Link to="#home" className="pill-nav__brand" smooth onClick={closeMenu}>
+        {brand}
+        <span>.</span>
+      </Link>
+
+      <nav className="pill-nav__shell" aria-label="Primary">
+        <div className="pill-nav__links">
+          {NAV_LINKS.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              smooth
+              className={active === item.to ? "is-active" : ""}
+              onClick={() => goTo(item.to)}
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
       </nav>
-      <div className="show-on-small hide-on-med-and-up z-depth-5">
+
+      <div className="pill-nav__actions">
         <button
-          className="mobile-theme-button"
-          onClick={() => props.toggleTheme("dark")}
+          type="button"
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
         >
-          {/* <img src = {filledBulb}  alt="bulb" height="40px" width="35px"/> */}
+          <span className="theme-toggle__track">
+            <span
+              className={`theme-toggle__thumb ${
+                theme === "dark" ? "is-dark" : ""
+              }`}
+            />
+          </span>
+        </button>
+        <button
+          type="button"
+          className={`pill-nav__burger ${menuOpen ? "is-open" : ""}`}
+          aria-expanded={menuOpen}
+          aria-label="Toggle menu"
+          onClick={() => setMenuOpen((o) => !o)}
+        >
+          <span />
+          <span />
+          <span />
         </button>
       </div>
-      <div
-        className="show-on-small hide-on-med-and-up bottom-menu z-depth-5"
-        onClick={toggleMenu}
-      >
-        <div className="menu-btn ">
-          <div className="menu-btn__burger z-depth-4"></div>
-        </div>
+
+      <div className={`pill-nav__drawer ${menuOpen ? "is-open" : ""}`}>
+        {NAV_LINKS.map((item) => (
+          <Link
+            key={item.to}
+            to={item.to}
+            smooth
+            className={active === item.to ? "is-active" : ""}
+            onClick={() => goTo(item.to)}
+          >
+            {item.label}
+          </Link>
+        ))}
       </div>
-      <div className="show-on-small hide-on-med-and-up">
-        <ul
-          className={`hamburger-menu && ${hideMenu ? "is-close" : "is-open"}`}
-        >
-          <li className="menu-item">
-            <Link to="#home" className="padding-10 hamburger-link" smooth>
-              Home
-            </Link>
-          </li>
-          <li className="menu-item">
-            <Link to="#aboutMe" className="padding-10 hamburger-link">
-              About Me
-            </Link>
-          </li>
-          <li className="menu-item">
-            <Link to="#experience" className="padding-10 hamburger-link">
-              Experince
-            </Link>
-          </li>
-          <li className="menu-item">
-            {/* <Link to="" className="padding-10 hamburger-link">
-              Projects
-            </Link> */}
-          </li>
-          <li className="menu-item" style={{ paddingBottom: "0px" }}>
-            <Link to="#contact" className="padding-10 hamburger-link">
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </div>
+    </header>
   );
 };
 

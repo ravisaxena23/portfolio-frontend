@@ -1,88 +1,92 @@
-import React, { useEffect, useState } from "react";
-import Abstract from "../../images/abstract.svg";
+import React from "react";
+import { usePortfolio } from "../../context/PortfolioContext";
 import Editor from "../Common/editor/Editor";
-import db from "../../firestore";
-import { collection, getDocs } from "firebase/firestore/lite";
+import Marquee from "../marquee/Marquee";
 import gitHub from "../../images/github.svg";
 import linkedin from "../../images/linkedin.svg";
 import email from "../../images/email.svg";
 
 const Home = () => {
-  const [initialIntroduction, setInitialIntroduction] = useState({});
-
-  useEffect(() => {
-    const fetchInitialData = async () => {
-      let initialData = collection(db, "InitialIntroduction");
-      let initialDataSnapshot = await getDocs(initialData);
-      initialDataSnapshot.forEach((doc) => {
-        setInitialIntroduction(doc.data());
-      });
-    };
-    fetchInitialData();
-  }, []);
+  const portfolio = usePortfolio();
+  const { greeting, socials, editor, metrics } = portfolio;
+  const resumeHref = greeting.resumeUrl || socials.linkedin;
+  const firstName = greeting.name.split(" ")[0];
 
   return (
-    <div className="home" id="home">
-      <div className="content">
-        <div className="text-content">
-          <p className="capitalize-class">{initialIntroduction.salutation}</p>
-          <h1 className="capitalize-class">{initialIntroduction.fullName}</h1>
-          <p className="flow-text uppercase-class small-screen-flex">
-            {initialIntroduction.oneLiner}
+    <section className="hero" id="home">
+      <div className="hero__atmosphere" aria-hidden="true" />
+      <div className="hero__spotlight" aria-hidden="true" />
+
+      <div className="hero__grid">
+        <div className="hero__copy hero-enter">
+          <p className="hero__salutation">
+            {greeting.salutation} {firstName}
           </p>
-          <a
-            className="resume-button"
-            href={initialIntroduction.myResume}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Download Resume
-          </a>
-          <span className="social-links">
-            {/* add mailto:abc@xyz.com in doc for proper function */}
+          <h1 className="hero__name">{greeting.name}</h1>
+          <p className="hero__display" aria-label={greeting.role}>
+            <span>{greeting.displayLine1 || "FULL-STACK"}</span>
+            <span>{greeting.displayLine2 || "AI ENGINEER"}</span>
+          </p>
+          <p className="hero__role">{greeting.role}</p>
+          <p className="hero__tagline">{greeting.tagline}</p>
+
+          <div className="cta-row">
             <a
-              href={initialIntroduction.mailMe}
+              className="btn btn-primary"
+              href={resumeHref}
               target="_blank"
               rel="noreferrer"
             >
-              <img
-                className="social-link-img"
-                src={email}
-                alt="mail-link"
-                height="25"
-                width="35"
-              />
+              Download Resume
+            </a>
+            <a className="btn btn-ghost" href="#ask">
+              Ask Ravi AI
+            </a>
+            <a className="btn btn-ghost" href="#contact">
+              Let&apos;s work together
+            </a>
+          </div>
+
+          <div className="social-row">
+            <a href={socials.email} aria-label="Email" className="social-link">
+              <img src={email} alt="" width="22" height="22" />
             </a>
             <a
-              href={initialIntroduction.githubURL}
+              href={socials.github}
               target="_blank"
               rel="noreferrer"
+              aria-label="GitHub"
+              className="social-link"
             >
-              <img className="social-link-img" src={gitHub} alt="github-link" />
+              <img src={gitHub} alt="" width="22" height="22" />
             </a>
             <a
-              href={initialIntroduction.linkedinURL}
+              href={socials.linkedin}
               target="_blank"
               rel="noreferrer"
+              aria-label="LinkedIn"
+              className="social-link"
             >
-              <img
-                className="social-link-img"
-                src={linkedin}
-                alt="linkedin-link"
-              />
+              <img src={linkedin} alt="" width="22" height="22" />
             </a>
-          </span>
+          </div>
         </div>
-        <div className="hide-on-med-and-down class-editor-call">
-          <Editor initialIntroduction={initialIntroduction}></Editor>
+
+        <div className="hero__visual hero-enter hero-enter--delay">
+          <Editor data={editor} />
+          <div className="hero__metrics">
+            {(metrics || []).slice(0, 3).map((m) => (
+              <div className="hero__metric" key={m.label}>
+                <strong>{m.value}</strong>
+                <span>{m.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div></div>
-      <div className="vector-class-1">
-        <img className="abstract-vector" src={Abstract} alt="vector"></img>
-      </div>
-    </div>
+      <Marquee />
+    </section>
   );
 };
 

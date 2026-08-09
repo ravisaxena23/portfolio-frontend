@@ -1,12 +1,20 @@
 import React from "react";
-import footer from "../../images/footerDesgin.svg";
+import { usePortfolio } from "../../context/PortfolioContext";
 
 const Footer = () => {
+  const portfolio = usePortfolio();
+  const year = new Date().getFullYear();
+  const name = portfolio.greeting?.name || "Ravi Saxena";
+
   return (
-    <div className="footer">
-      <img className="footer-img" src={footer} alt="footer" />
-      <div className="display-flex footer-info hide-on-small-only">Made with love and React by Ravi Saxena</div>
-    </div>
+    <footer className="site-footer">
+      <div className="site-footer__inner">
+        <p>
+          © {year} {name}. Built with React.
+        </p>
+        <p className="site-footer__note">Systems in motion.</p>
+      </div>
+    </footer>
   );
 };
 

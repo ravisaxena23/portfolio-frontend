@@ -1,66 +1,93 @@
-.editor-class {
-    position: relative;
+.editor-shell {
+  width: 100%;
+  max-width: 440px;
+  margin-left: auto;
 }
 
-.card-class {
-    max-width: 440px;
-
-    .card-radius {
-        border-radius: 10px;
-    }
+.editor-window {
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: $fontMono;
+  font-size: 0.82rem;
+  line-height: 1.55;
 }
 
-.editor-var {
-    color: $editorVarColor;
+#light .editor-window {
+  background: $editorBackgroundColor;
+  border: 1px solid rgba(#000, 0.2);
 }
 
-.editor-line-number {
-    color: $editorLineNumberColor !important
+#dark .editor-window {
+  background: $editorDarkTheme;
+  border: 1px solid rgba(#fff, 0.08);
 }
 
-.editor-user-var {
-    color: $editorUserVarColor !important;
+.editor-window__chrome {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(#fff, 0.08);
 }
 
-.editor-bracket-color {
-    color: $editorLineNumberColor !important;
+.editor-window__title {
+  color: rgba(#fff, 0.45);
+  font-size: 0.75rem;
 }
 
-.editor-property-color {
-    color: $editorPropertyColor;
+.editor-window__body {
+  padding: 1.1rem 1.15rem 1.35rem;
 }
 
-.editor-user-string {
-    color: $editorUserString;
+.editor-window__body p {
+  margin: 0.15rem 0;
+  white-space: normal;
+  word-break: break-word;
 }
 
-.editor-class-property {
-    color: $editorClassProperty
+.ln {
+  display: inline-block;
+  width: 1.4rem;
+  margin-right: 0.65rem;
+  color: $editorLineNumberColor;
+  user-select: none;
 }
 
-#light {
-    .editor-card {
-        background-color: $editorBackgroundColor;
-        box-shadow: 0 20px 68px rgb(0 0 0 / 55%);
-    }
-
-    .editor-card-content {
-        padding: 20px 35px;
-        line-height: 20px;
-        color: $lightTextColor;
-    }
+.kw {
+  color: $editorVarColor;
 }
 
-#dark {
+.id {
+  color: $editorUserVarColor;
+}
 
-    .editor-card {
-        background-color: $editorDarkTheme;
-        box-shadow: 0 20px 68px rgb(0 0 0 / 55%);
-    }
+.prop {
+  color: $editorPropertyColor;
+}
 
-    .editor-card-content {
-        padding: 20px 35px;
-        line-height: 20px;
-        color: $darkTextColor;
-    }
+.str {
+  color: $editorUserString;
+}
+
+.type {
+  color: $editorClassProperty;
+}
+
+.fn {
+  color: $editorUserVarColor;
+}
+
+.num {
+  color: $editorUserString;
+}
+
+.punct {
+  color: $editorLineNumberColor;
+}
+
+@media (max-width: $medium) {
+  .editor-shell {
+    max-width: none;
+    margin-left: 0;
+  }
 }

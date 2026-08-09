@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# Ravi Saxena — Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal portfolio for **Ravi Saxena**, Senior Software Engineer (Full-Stack & Backend Systems).
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+- React 18 (Create React App)
+- SCSS design system (Syne + IBM Plex)
+- Firebase Firestore for portfolio content + contact messages
 
-### `npm start`
+## Quick start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+cd portfolio-frontend
+cp .env.example .env   # if needed — keys already set for portfolio-9be96
+npm install
+npm start
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Open [http://localhost:3000](http://localhost:3000).
 
-### `npm test`
+## Content
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Canonical resume content lives in [`src/data/portfolio.js`](src/data/portfolio.js).
 
-### `npm run build`
+The app loads **`portfolio/content`** from Firestore at runtime. If that doc is missing or incomplete, it falls back to the local file (same keys — not mock data).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Seed Firebase from portfolio.js
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+node scripts/seed-portfolio.js
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Writes the real object to `portfolio/content` with keys:
 
-### `npm run eject`
+`greeting`, `socials`, `editor`, `about`, `metrics`, `experience`, `skillGroups`, `awards`, `education`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+If seeding fails with a permissions error, temporarily allow writes in Firestore rules:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+match /portfolio/{doc} {
+  allow read: if true;
+  allow write: if true; // one-time seed only
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Then re-run the seed script and lock writes again (`allow write: if false`), keeping public read.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Resume PDF
 
-## Learn More
+- Hosted with the site: [`public/ravi_saxena_fullstack_engineer.pdf`](public/ravi_saxena_fullstack_engineer.pdf) → hero CTA uses `/ravi_saxena_fullstack_engineer.pdf`
+- Google Drive: [view link](https://drive.google.com/file/d/1ZHkEUw9hcnU5dbtkA8ojIE461aBIiMVs/view?usp=sharing) (also in `greeting.resumeDriveUrl`)
+- LaTeX source: [`resume/ravi_saxena_fullstack_engineer.tex`](resume/ravi_saxena_fullstack_engineer.tex) — compile with `pdflatex` when you have TeX installed, then replace the public PDF
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Contact form
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Submits to collection `Message` with fields `name`, `email`, `mobileNumber`, `query`, `createdAt`.
 
-### Code Splitting
+## Scripts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Command | Description |
+|---------|-------------|
+| `npm start` | Dev server |
+| `npm run build` | Production build |
+| `node scripts/seed-portfolio.js` | Push portfolio.js → Firestore |
 
-### Analyzing the Bundle Size
+## Env vars
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+See [`.env.example`](.env.example). CRA requires the `REACT_APP_` prefix.

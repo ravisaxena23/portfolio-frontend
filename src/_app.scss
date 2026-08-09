@@ -1,121 +1,278 @@
-@import './colors', 
-'./components/navbar/navbar', 
-'./components/Common/Toolbar/toolbar', 
-'./components/home/home', 
-'./components/Common/editor/editor' ,
-'./components/experience/experience',
-'./components/contact/contact',
-'./components/footer/footer',
-'./components/aboutMe/aboutme';
+@import "./colors";
+@import "./components/navbar/navbar";
+@import "./components/home/home";
+@import "./components/Common/editor/editor";
+@import "./components/marquee/marquee";
+@import "./components/askRavi/askRavi";
+@import "./components/impact/impact";
+@import "./components/aboutMe/aboutme";
+@import "./components/experience/experience";
+@import "./components/skills/skills";
+@import "./components/stack/stack";
+@import "./components/awards/awards";
+@import "./components/contact/contact";
+@import "./components/footer/footer";
 
-.display-flex {
-    display: flex;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.padding-20 {
-    padding: 20px;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
 }
 
-.padding-10 {
-    padding: 10px;
-}
-.margin-left-5{
-    margin-left: 5px;
-}
-
-.margin-right-5{
-    margin-right: 5px;
+body {
+  margin: 0;
+  font-family: $fontBody;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-.margin-top-20{
-    margin-top: 20px;
+a {
+  color: inherit;
 }
 
-.margin-top-40{
-    margin-top: 40px;
+img {
+  max-width: 100%;
+  display: block;
 }
 
-.margin-60{
-    margin: 60px;
+.App {
+  position: relative;
+  min-height: 100vh;
 }
 
-.margin-top-150{
-    margin-top: 150px;
+main {
+  position: relative;
+  z-index: 1;
 }
 
-.margin-bottom-0{
-    margin-bottom: 0px;
+.pointer-field {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    380px circle at var(--mx, 50%) var(--my, 30%),
+    rgba($ember, 0.09),
+    transparent 55%
+  );
+  opacity: 0.9;
 }
 
-.box-shadow{
-    box-shadow: 0 20px 68px rgb(0 0 0 / 55%);
+#dark .pointer-field {
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 30%),
+    rgba($amber, 0.08),
+    transparent 58%
+  );
+  opacity: 1;
 }
 
+#light.App,
 #light {
-    background-color: $lightBackgroundColor;
-    color: $lightTextColor;
-
-    .page-heading {
-        font-size: 2.2rem;
-        text-transform: capitalize;
-        display: flex;
-        justify-content: center;
-        line-height: 110%;
-        margin: 0px;
-        font-weight: 900;
-        color: $blackColor;
-
-        @media screen and (max-width: 400px) {
-            font-size: 3.2rem;
-            line-height: 110%;
-            margin: 0px;
-            font-weight: 700;
-        }
-    }
+  background-color: $lightBackgroundColor;
+  color: $lightTextColor;
 }
 
+#dark.App,
 #dark {
-    background-color: $darkBackgroundColor;
-    color: $darkTextColor;
-
-    .page-heading {
-        font-size: 2.2rem;
-        display: flex;
-        text-transform: capitalize;
-        justify-content: center;
-        line-height: 110%;
-        margin: 0px;
-        font-weight: 900;
-        color: $darkHeadingColor;
-
-        @media screen and (max-width: 400px) {
-            font-size: 3.2rem;
-            line-height: 110%;
-            margin: 0px;
-            font-weight: 700;
-        }
-    }
+  background-color: $darkBackgroundColor;
+  color: $darkTextColor;
 }
 
-#dark{
-    .App {
-        min-height: 100vh;
-        background-color: $darkBackgroundColor;
-    }
+.site-footer {
+  position: relative;
+  z-index: 1;
 }
 
-#light{
-    .App {
-        min-height: 100vh;
-        background-color: $lightBackgroundColor;
-    }
+.section {
+  width: min(100% - 2.5rem, $contentMax);
+  margin-inline: auto;
+  padding-block: 3.25rem;
 }
 
-
-.uppercase-class {
-    text-transform: uppercase;
+.section-kicker {
+  margin: 0 0 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.capitalize-class {
-    text-transform: capitalize;
+#light .section-kicker {
+  color: $ember;
+}
+
+#dark .section-kicker {
+  color: $amber;
+}
+
+.section-heading {
+  font-family: $fontDisplay;
+  font-size: clamp(1.65rem, 2.8vw, 2.15rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.45rem;
+  line-height: 1.15;
+}
+
+.section-heading--display {
+  font-size: clamp(1.9rem, 4vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin-bottom: 0.65rem;
+}
+
+.section-lede {
+  margin: 0 0 1.5rem;
+  max-width: 36rem;
+  line-height: 1.55;
+  font-size: 1rem;
+}
+
+#light .section-lede {
+  color: $lightMuted;
+}
+
+#dark .section-lede {
+  color: $darkMuted;
+}
+
+#light .section-heading {
+  color: $lightHeadingColor;
+}
+
+#dark .section-heading {
+  color: $darkHeadingColor;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.8rem 1.2rem;
+  font-family: $fontBody;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#light .btn-primary {
+  background: $lightAccent;
+  color: #fff;
+}
+
+#light .btn-primary:hover {
+  background: darken($lightAccent, 6%);
+}
+
+#dark .btn-primary {
+  background: $darkAccent;
+  color: $slate950;
+}
+
+#dark .btn-primary:hover {
+  background: lighten($darkAccent, 6%);
+}
+
+#light .btn-ghost {
+  background: transparent;
+  border-color: rgba($ink, 0.25);
+  color: $ink;
+}
+
+#light .btn-ghost:hover {
+  border-color: $lightAccent;
+  color: $lightAccent;
+}
+
+#dark .btn-ghost {
+  background: transparent;
+  border-color: rgba(#fff, 0.28);
+  color: $darkTextColor;
+}
+
+#dark .btn-ghost:hover {
+  border-color: $darkAccent;
+  color: $darkAccent;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.social-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.social-row a {
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.social-row a:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.social-row img {
+  width: 28px;
+  height: 28px;
+}
+
+@media (max-width: $small) {
+  .section {
+    width: min(100% - 1.35rem, $contentMax);
+    padding-block: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pointer-field {
+    display: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }

@@ -1,0 +1,94 @@
+.awards__layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.awards__subhead {
+  margin: 0 0 1rem;
+  font-family: $fontDisplay;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+#light .awards__subhead {
+  color: $ember;
+}
+
+#dark .awards__subhead {
+  color: $amber;
+}
+
+.awards__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.awards__list li {
+  padding: 0.85rem 1rem;
+  border-left: 3px solid transparent;
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+#light .awards__list li {
+  background: #fff;
+  border-left-color: $ember;
+  border: 1px solid $line;
+  border-left: 3px solid $ember;
+}
+
+#dark .awards__list li {
+  background: $slate900;
+  border: 1px solid $lineDark;
+  border-left: 3px solid $amber;
+}
+
+.awards__education {
+  padding: 1.35rem 1.25rem;
+}
+
+#light .awards__education {
+  background: rgba($ember, 0.06);
+  border: 1px solid rgba($ember, 0.18);
+}
+
+#dark .awards__education {
+  background: rgba($amber, 0.08);
+  border: 1px solid rgba($amber, 0.2);
+}
+
+.awards__degree {
+  margin: 0 0 0.4rem;
+  font-family: $fontDisplay;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.awards__school,
+.awards__detail {
+  margin: 0.25rem 0 0;
+  font-size: 0.95rem;
+}
+
+#light .awards__school,
+#light .awards__detail {
+  color: $lightMuted;
+}
+
+#dark .awards__school,
+#dark .awards__detail {
+  color: $darkMuted;
+}
+
+@media (max-width: $medium) {
+  .awards__layout {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}
