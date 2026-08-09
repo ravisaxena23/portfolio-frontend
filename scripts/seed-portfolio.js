@@ -65,9 +65,9 @@ async function main() {
 main().catch((err) => {
   console.error("Seed failed:", err.code || "", err.message || err);
   console.error(
-    "\nIf permission-denied: in Firebase Console → Firestore → Rules, temporarily:\n" +
+    "\nIf permission-denied: temporarily allow portfolio writes in Firebase Console Rules,\n" +
       "  match /portfolio/{docId} { allow read, write: if true; }\n" +
-      "Re-run npm run seed:portfolio, then set write: if false (keep read: if true)."
+      "then re-run npm run seed:portfolio and restore firestore.rules (write: if false)."
   );
   process.exit(1);
 });

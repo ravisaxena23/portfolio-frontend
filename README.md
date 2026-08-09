@@ -40,11 +40,21 @@ npm start
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## Content
+## Firestore security (free Spark plan)
 
-Canonical resume content lives in [`src/data/portfolio.js`](src/data/portfolio.js).
+Rules live in [`firestore.rules`](firestore.rules). Paste them in:
 
-The app loads **`portfolio/content`** from Firestore at runtime. If that doc is missing or incomplete, it falls back to the local file (same keys — not mock data).
+**Firebase Console → Firestore Database → Rules → Publish**
+
+What they do on the free tier:
+
+| Path | Client can… |
+|------|-------------|
+| `portfolio/*` | **Read** only (site content) |
+| `Message/*` | **Create** only (contact form), with size/shape checks |
+| Everything else | **Denied** |
+
+View contact messages only in the Firebase Console (clients cannot list/read them).
 
 ### Seed Firebase from portfolio.js
 
@@ -56,16 +66,14 @@ Writes the real object to `portfolio/content` with keys:
 
 `greeting`, `socials`, `editor`, `about`, `metrics`, `experience`, `skillGroups`, `awards`, `education`
 
-If seeding fails with a permissions error, temporarily allow writes in Firestore rules:
+Seeding needs a one-time write. Temporarily change only this block in Rules, Publish, seed, then restore locked rules from `firestore.rules` and Publish again:
 
 ```
-match /portfolio/{doc} {
+match /portfolio/{docId} {
   allow read: if true;
-  allow write: if true; // one-time seed only
+  allow write: if true; // TEMP seed only — remove after
 }
 ```
-
-Then re-run the seed script and lock writes again (`allow write: if false`), keeping public read.
 
 ### Resume PDF
 
@@ -75,8 +83,14 @@ Then re-run the seed script and lock writes again (`allow write: if false`), kee
 
 ### Contact form
 
-Submits to collection `Message` with fields `name`, `email`, `mobileNumber`, `query`, `createdAt`.
+Submits to collection `Message` with fields `name`, `email`, `mobileNumber`, `query`, `createdAt` (create-only under locked rules).
 
+### Optional: restrict the browser API key (still free)
+
+Google Cloud Console → APIs & Services → Credentials → your Browser key → Application restrictions → HTTP referrers:
+
+- `https://ravisaxena.vercel.app/*`
+- `http://localhost:3000/*`
 ## Scripts
 
 | Command | Description |
