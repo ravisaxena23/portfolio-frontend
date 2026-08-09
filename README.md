@@ -1,18 +1,39 @@
-# Ravi Saxena — Portfolio
+# Ravi Saxena — Full-Stack AI Engineer Portfolio
 
-Personal portfolio for **Ravi Saxena**, Senior Software Engineer (Full-Stack & Backend Systems).
+Personal [portfolio website](https://ravisaxena.vercel.app/) for **Ravi Saxena** — Full-Stack AI Engineer focused on systems, SaaS, and LLM workflows.
+
+**Live demo:** https://ravisaxena.vercel.app/
+
+[![Live Demo](https://img.shields.io/badge/demo-ravisaxena.vercel.app-ffbc42?style=for-the-badge&logo=vercel&logoColor=white)](https://ravisaxena.vercel.app/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+
+## Features
+
+- Floating pill navigation with dark / light theme
+- Interactive **Ask Ravi AI** Q&A grounded in resume data
+- Experience timeline, skill matrix, stack cards, awards & education
+- Firebase-backed content + contact form
+- Resume PDF download (site + Drive)
+- Mobile-first responsive layout
+
+## Topics
+
+`portfolio` · `portfolio-website` · `developer-portfolio` · `react` · `personal-website` · `resume` · `fullstack` · `ai-engineer`
 
 ## Stack
 
 - React 18 (Create React App)
 - SCSS design system (Syne + IBM Plex)
 - Firebase Firestore for portfolio content + contact messages
+- Deployed on [Vercel](https://ravisaxena.vercel.app/)
 
 ## Quick start
 
 ```bash
+git clone https://github.com/ravisaxena23/portfolio-frontend.git
 cd portfolio-frontend
-cp .env.example .env   # if needed — keys already set for portfolio-9be96
+cp .env.example .env
 npm install
 npm start
 ```
@@ -28,7 +49,7 @@ The app loads **`portfolio/content`** from Firestore at runtime. If that doc is 
 ### Seed Firebase from portfolio.js
 
 ```bash
-node scripts/seed-portfolio.js
+npm run seed:portfolio
 ```
 
 Writes the real object to `portfolio/content` with keys:
@@ -50,7 +71,7 @@ Then re-run the seed script and lock writes again (`allow write: if false`), kee
 
 - Hosted with the site: [`public/ravi_saxena_fullstack_engineer.pdf`](public/ravi_saxena_fullstack_engineer.pdf) → hero CTA uses `/ravi_saxena_fullstack_engineer.pdf`
 - Google Drive: [view link](https://drive.google.com/file/d/1ZHkEUw9hcnU5dbtkA8ojIE461aBIiMVs/view?usp=sharing) (also in `greeting.resumeDriveUrl`)
-- LaTeX source: [`resume/ravi_saxena_fullstack_engineer.tex`](resume/ravi_saxena_fullstack_engineer.tex) — compile with `pdflatex` when you have TeX installed, then replace the public PDF
+- LaTeX source: [`resume/ravi_saxena_fullstack_engineer.tex`](resume/ravi_saxena_fullstack_engineer.tex)
 
 ### Contact form
 
@@ -62,8 +83,12 @@ Submits to collection `Message` with fields `name`, `email`, `mobileNumber`, `qu
 |---------|-------------|
 | `npm start` | Dev server |
 | `npm run build` | Production build |
-| `node scripts/seed-portfolio.js` | Push portfolio.js → Firestore |
+| `npm run seed:portfolio` | Push portfolio.js → Firestore |
 
 ## Env vars
 
 See [`.env.example`](.env.example). CRA requires the `REACT_APP_` prefix.
+
+## License
+
+MIT © [Ravi Saxena](https://github.com/ravisaxena23)
